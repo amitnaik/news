@@ -100,11 +100,6 @@ $("#auto").change(function(){
 	if(loading_time == 0){
 		clearInterval(interval);
 	}
-
 });
-
-
-
-
 
 });
