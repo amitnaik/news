@@ -29,7 +29,7 @@ function loadNews(country){
 			country = ".co.in";
 	}
 		
-	console.log('http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=20&q=http://news.google' + country + '/news?output=rss');
+	//console.log('http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=20&q=http://news.google' + country + '/news?output=rss');
 		$("#status").html("<img src='http://i.stack.imgur.com/Pi5r5.gif' />");
 			$.ajax({
 					url: 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=20&q=http://news.google' + country + '/news?output=rss',
@@ -47,12 +47,20 @@ function loadNews(country){
 											"<div class='news-title'>" + 
 												data['responseData'].feed['entries'][cnt]['title'] + 
 											"</div>" +
-											
 											"<div class='news-content'>" + 
 												data['responseData'].feed['entries'][cnt]['content'] +
 											"</div>" + 
 									"</div>");
 						
+					}
+					var srcArr = []; var newSrc ="";
+					if(window.location.protocol == "file:"){
+						$('#page-news img').each(function(){
+							if($(this).attr('src') != undefined){
+							newSrc = "http:" + $(this).attr('src');
+							}
+							srcArr.push($(this).attr("src",newSrc));
+						});
 					}
 					$("#page-news").slideDown( "slow" );
 					$("#status").html('');
@@ -94,7 +102,7 @@ $("#auto").change(function(){
 		loadNews($(".active").attr('id'));
 			
 		}, loading_time * 60 * 10);
-		console.log(loading_time);
+		//console.log(loading_time);
 	
 	
 	if(loading_time == 0){
