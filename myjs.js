@@ -85,13 +85,13 @@ $(".country-selection").click(function(){
 $("#auto").change(function(){
 
 	var loading_time = (document.getElementById("auto").value);
-	if(loading_time > "0" )
+	if(loading_time > 0 )
 		{
-			if(loading_time < 20){
-			alert("News will automatically reload in " + loading_time/100 + " minutes.");
+			if(loading_time <= 2000){
+			alert("News will automatically refresh in " + loading_time/100 + " minutes.");
 			}
-			if(loading_time > 20){
-			alert("News will automatically reload in " + loading_time/1000 + " minutes.");
+			if(loading_time > 2000){
+			alert("News will automatically refresh in " + loading_time/1000 + " minutes.");
 			}
 			
 		}
@@ -100,7 +100,9 @@ $("#auto").change(function(){
 		$("#page-news").hide();
 		$("#page-news").html('');
 		loadNews($(".active").attr('id'));
-			
+			var d = new Date();
+			document.getElementById("update-info").innerHTML = "Last Updated on " + d.toLocaleTimeString();
+			console.log("Last updated on " + d.toLocaleTimeString());
 		}, loading_time * 60 * 10);
 		//console.log(loading_time);
 	
